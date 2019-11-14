@@ -26,24 +26,27 @@
         <th>Price</th>
       </tr>
       <?php
-      $args = [
-        'brand' => 'Trek', 'model' => 'Emonda', 'year' => 2019,
-        'gender' => 'Unisex', 'color' => 'black', 'category' => 'Road',
-        'weight_kg' => 1.5, 'price' => 1000.00
-      ];
-      $bike = new Bicycle($args);
+
+      $parse = new ParseCSV(PRIVATE_PATH . '/used_bicycles.csv');
+      $bike_array = $parse->parse();
+
       ?>
-      <tr>
-        <td><?= h($bike->brand); ?> </td>
-        <td><?= h($bike->model); ?></td>
-        <td><?= h($bike->year); ?></td>
-        <td><?= h($bike->category); ?></td>
-        <td><?= h($bike->gender); ?></td>
-        <td><?= h($bike->color); ?></td>
-        <td><?= h($bike->get_weight_kg()) . ' / ' . h($bike->get_weight_lbs()); ?></td>
-        <td><?= h($bike->condition()); ?></td>
-        <td><?= h($bike->price); ?></td>
-      </tr>
+      <?php foreach ($bike_array as $args) : ?>
+
+        <?php $bike = new Bicycle($args); ?>
+        <tr>
+          <td><?= h($bike->brand); ?> </td>
+          <td><?= h($bike->model); ?></td>
+          <td><?= h($bike->year); ?></td>
+          <td><?= h($bike->category); ?></td>
+          <td><?= h($bike->gender); ?></td>
+          <td><?= h($bike->color); ?></td>
+          <td><?= h($bike->get_weight_kg()) . ' / ' . h($bike->get_weight_lbs()); ?></td>
+          <td><?= h($bike->condition()); ?></td>
+          <td><?= h($bike->price); ?></td>
+        </tr>
+      <? endforeach; ?>
+
 
     </table>
   </div>
