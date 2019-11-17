@@ -6,42 +6,62 @@
 <?php include(SHARED_PATH . '/public_header.php'); ?>
 
 <div>
-    <div>
-        <div>
-            <img src="<?= url_for('images/brain-small.jpeg') ?>" alt="feed your brain">
-            <h2>Our Inventory of Used Bicycles</h2>
-            <p>Choose the bike you love.</p>
-            <p>We will deliver it to your door and let you try it before you buy it.</p>
+    <div class="main courses">
+        <div class="row">
+            <div class="ten columns item-text">
+                <h2>هذه جميع الكورسات التي أخذتها</h2>
+            </div>
+            <div class="two columns item-img">
+                <img src="<?= url_for('images/brain-small.jpeg') ?>" alt="feed your brain">
+            </div>
+
         </div>
 
-        <table >
-            <tr>
-                <th>Course Name</th>
-                <th>Organization</th>
-                <th>Teacher</th>
-                <th>Level</th>
-                <th>Subject</th>
-                <th>long in hours</th>
-                <th>Completion?</th>
-                <th>Rate</th>
-                <th>Date of Complete it</th>
-                <th>link</th>
-                <th>Notes</th>
-            </tr>
-            <tr>
-                <td>Course Name</td>
-                <td>Organization</td>
-                <td>Teacher</td>
-                <td>Level</td>
-                <td>Subject</td>
-                <td>long in hours</td>
-                <td>Completion?</td>
-                <td>Rate</td>
-                <td>Date of Complete it</td>
-                <td>link</td>
-                <td>Notes</td>
-            </tr>
+        <table class="rtl u-cf  ">
+            <thead>
+                <tr>
+                    <th>اسم الكورس</th>
+                    <th>المؤسسة</th>
+                    <th>مقدم المحتوى</th>
+                    <th>المستوى</th>
+                    <th>المادة</th>
+                    <th>اللغة</th>
+                    <th>الطول بالساعات</th>
+                    <th>مكتملة؟</th>
+                    <th>التقييم الشخصي</th>
+                    <th>تاريخ الإكمال</th>
+                    <th>الرابط</th>
+                    <th>ملاحظات</th>
+                </tr>
+            </thead>
 
+            <?php
+            $parse = new ParseCSV(PRIVATE_PATH . '/my_courses.csv');
+            $courses_array = $parse->parse();
+            ?>
+
+            <?php foreach ($courses_array as $args) : ?>
+
+                <?php $course = new Course($args); ?>
+
+                <tbody>
+                    <tr>
+                        <td><?= h($course->name); ?> </td>
+                        <td><?= h($course->organization); ?> </td>
+                        <td><?= h($course->teacher); ?> </td>
+                        <td><?= h($course->level); ?> </td>
+                        <td><?= h($course->subject); ?> </td>
+                        <td><?= h($course->language); ?> </td>
+                        <td><?= h($course->long_in_hours); ?> </td>
+                        <td><?= h($course->is_complete); ?> </td>
+                        <td><?= h($course->rating); ?> </td>
+                        <td><?= h($course->date_complete); ?> </td>
+                        <td><?= h($course->link); ?> </td>
+                        <td><?= h($course->notes); ?> </td>
+                    </tr>
+                </tbody>
+
+            <?php endforeach; ?>
         </table>
     </div>
 </div>
