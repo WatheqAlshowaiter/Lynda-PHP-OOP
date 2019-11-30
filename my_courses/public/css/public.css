@@ -120,5 +120,8 @@ header .main-logo {
 .courses-table tr, th, td {
     border: solid 1px black;
 }
+.courses-table :nth-child(1){
+    padding: 12px 15px;
+}
 
 /*  End courses page  */
