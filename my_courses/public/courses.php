@@ -56,7 +56,7 @@
                         <td><?= h($course->is_complete); ?> </td>
                         <td><?= h($course->rating); ?> </td>
                         <td><?= h($course->date_complete); ?> </td>
-                        <td><?= h($course->link); ?> </td>
+                        <td> <a  target="_blank" href=" <?= h($course->link); ?>">الرابط</a> </td>
                         <td><?= h($course->notes); ?> </td>
                     </tr>
                 </tbody>
